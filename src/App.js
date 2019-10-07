@@ -17,11 +17,23 @@ function App() {
 		setCart([...cart, item]);
 	};
 
-	const removeItem = (item) => {
-		console.log('i', item)
-		const result = cart.splice(item => item !== cart);
-		setCart([...cart, result])
-	}
+	// const removeItem = (id) => {
+		// let count = 0;
+		// let newCart = [];
+
+		// cart.forEach((item, index) => {
+		// 	if(item.id === id && count === 0) {
+		// 		count++
+		// 	}else{
+		// 		newCart.push(item);
+		// 	}
+		// })
+		// setCart(newCart)
+	//	};
+
+	const removeItem = id => {
+        setCart(cart.filter(item => item.id !== id));
+    };
 
 	return (
 		<ProductContext.Provider value={{ products, addItem }}>
