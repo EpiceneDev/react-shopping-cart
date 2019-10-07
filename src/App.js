@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Route } from 'react-router-dom';
 import data from './data';
 
@@ -9,6 +9,7 @@ import ShoppingCart from './components/ShoppingCart';
 import ProductContext from './contexts/ProductContext';
 import CartContext from './contexts/CartContext';
 
+
 function App() {
 	const [products] = useState(data);
 	const [cart, setCart] = useState([]);
@@ -17,23 +18,15 @@ function App() {
 		setCart([...cart, item]);
 	};
 
-	// const removeItem = (id) => {
-		// let count = 0;
-		// let newCart = [];
-
-		// cart.forEach((item, index) => {
-		// 	if(item.id === id && count === 0) {
-		// 		count++
-		// 	}else{
-		// 		newCart.push(item);
-		// 	}
-		// })
-		// setCart(newCart)
-	//	};
-
 	const removeItem = id => {
         setCart(cart.filter(item => item.id !== id));
     };
+
+
+	useEffect(() => {
+		localStorage.setItem('cart', JSON.stringify(cart)) 
+    }, [cart]);
+		
 
 	return (
 		<ProductContext.Provider value={{ products, addItem }}>
